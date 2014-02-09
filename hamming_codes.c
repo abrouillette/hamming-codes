@@ -18,17 +18,28 @@ struct binary_byte charToByte(char c){
   return byte;
 }
 
+char byteToChar(struct binary_byte byte){
+  int value = 0;
+  int i;
+
+  for(i = 0; i < 8; i++){
+    value += (1 << i) * byte.data[i];
+  }
+
+  return (char)value;
+}
+
 int main(){
   struct binary_byte binary;
   int i = 0;
 
-  binary = charToByte('a');
+  binary = charToByte('Z');
 
-  printf("Testing %c is %d:\n", 'a', 'a');
+  printf("Testing %c is %d:\nIn binary: ", 'Z', 'Z');
 
   for(i = 7; i >= 0; i--){
     printf("%d ", binary.data[i]);
   }
 
-  printf("\n");
+  printf("\nDecoded: %c\n", byteToChar(binary));
 }
